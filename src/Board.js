@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -78,13 +78,35 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+
+    // take in rowIndex and count how many rooks/queens there are
+    // return true if count more than one
+    // otherwise return false
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      const row = this.get(rowIndex);
+      let counter = 0;
+      row.forEach((item, i) => {
+        if (item) {
+          counter++;
+        }
+      });
+      return counter > 1; // fixme
     },
 
     // test if any rows on this board contain conflicts
+
+    // grab all rows and iterate through all rows.
+    // call hasRowConflictAt() on each row
+    // if any return true, return true
+    // otherwise return false
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      const rows = this.rows();
+      for (let i = 0; i < rows.length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -93,13 +115,35 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
+
+    // grab the rows and count how many rooks/queens are in a column
+    // return true if count more than one
+    // otherwise return false
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      const rows = this.rows();
+      let counter = 0;
+      rows.forEach((item, i) => {
+        if (item[colIndex]) {
+          counter++;
+        }
+      });
+      return counter > 1;
     },
 
     // test if any columns on this board contain conflicts
+
+    // get dimensions of problem and set as the number of columns
+    // call hasColConflictAt() on each column
+    // if any return true, return true
+    // otherwise return false
     hasAnyColConflicts: function() {
-      return false; // fixme
+      const rows = this.rows();
+      for (let i = 0; i < rows.length; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
